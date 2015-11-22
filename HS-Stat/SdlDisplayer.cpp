@@ -74,10 +74,14 @@ bool SdlDisplayer::manageInput()
 				_spriteManager->eraseAllSprite();
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN){
-			_spriteManager->addCard("Leper Gnome", "1", true);
-			_spriteManager->addCard("Leper Gnome", "1", false);
-			_spriteManager->addCard("Wolfrider", "3", false);
-			_spriteManager->addCard("Elven Archer", "2", false);
+			_spriteManager->addCard("Leper Gnome", "1", "common", true);
+			_spriteManager->addCard("Leper Gnome", "1", "common", false);
+			_spriteManager->addCard("Wolfrider", "3", "epic", false);
+			_spriteManager->addCard("Gazlowe", "0", "rare", false);
+			_spriteManager->addCard("Gazlowe", "0", "rare", true);
+			_spriteManager->addCard("Wolfrider", "3", "epic", true);
+			_spriteManager->addCard("Elven Archer", "2", "legendary", true);
+			_spriteManager->addCard("Elven Archer", "2", "legendary", false);
 			return true;
 		}
 	}
@@ -90,8 +94,8 @@ bool SdlDisplayer::draw()
 
 	if (firstTime) {
 		firstTime = false;
-		_spriteManager->addCard("Leper Gnome", "1", true);
-		_spriteManager->addCard("Leper Gnome", "1", false);
+		_spriteManager->addCard("Leper Gnome", "1", "common", true);
+		_spriteManager->addCard("Leper Gnome", "1", "common", false);
 	}
 
 	SDL_SetRenderDrawColor(_renderer, 14, 25, 55, 255);

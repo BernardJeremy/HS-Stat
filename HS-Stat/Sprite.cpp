@@ -5,6 +5,8 @@ Sprite::Sprite()
 {
 	_decalXPixel = 0;
 	_nbrPlayed = 1;
+	_manaCost = 0;
+	_isLegendary = false;
 }
 
 
@@ -32,6 +34,11 @@ SDL_Texture *Sprite::getCost() const
 	return _cost;
 }
 
+SDL_Texture *Sprite::getRarityGem() const
+{
+	return _rarityGem;
+}
+
 int Sprite::getDecalXPixel() const
 {
 	return _decalXPixel;
@@ -40,6 +47,16 @@ int Sprite::getDecalXPixel() const
 int Sprite::getNbrPlayed() const
 {
 	return _nbrPlayed;
+}
+
+int Sprite::getManaCost() const
+{
+	return _manaCost;
+}
+
+bool Sprite::isLegendary() const
+{
+	return _isLegendary;
 }
 
 void Sprite::setFrame(SDL_Texture *frame)
@@ -62,6 +79,11 @@ void Sprite::setCost(SDL_Texture *cost)
 	_cost = cost;
 }
 
+void Sprite::setRarityGem(SDL_Texture *rarityGem)
+{
+	_rarityGem = rarityGem;
+}
+
 void Sprite::setDecalXPixel(int decalXPixel)
 {
 	_decalXPixel = decalXPixel;
@@ -72,7 +94,17 @@ void Sprite::setNbrPlayed(int nbrPlayed)
 	_nbrPlayed = nbrPlayed;
 }
 
+void Sprite::setManaCost(int manaCost)
+{
+	_manaCost = manaCost;
+}
+
 void Sprite::incNbrPlayed()
 {
 	++_nbrPlayed;
+}
+
+void Sprite::setIsLegendary(bool isLegendary)
+{
+	_isLegendary = isLegendary;
 }

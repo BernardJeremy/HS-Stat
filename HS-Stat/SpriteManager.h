@@ -1,7 +1,7 @@
 #pragma once
 
 #include <algorithm>
-#include <vector>
+#include <list>
 #include <map>
 
 #include "SDL_ttf.h"
@@ -27,6 +27,9 @@
 #define W_COST 15
 #define H_COST 30
 
+#define W_GEM 28
+#define H_GEM 28
+
 class SpriteManager
 {
 public:
@@ -39,7 +42,7 @@ public:
 	static const int W_LOCAL_ZONE = 218;
 	static const int DECAL_ZONE = 2;
 
-	bool addCard(std::string cardName, std::string cost, bool isLocalPlayer);
+	bool addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer);
 	bool drawAllSprite() const;
 	void eraseAllSprite(bool eraseAll = false);
 
@@ -47,14 +50,16 @@ private:
 	SDL_Texture *AddFrame();
 	SDL_Texture *AddImage(std::string &fileName) const;
 	SDL_Texture *AddText(std::string &cardName) const;
+	SDL_Texture *AddRarityGem(std::string &cardRarity, Sprite *sprite) const;
 
 	std::string cardNameToFileName(std::string &cardName) const;
 
 	void replaceAll(std::string& str, const std::string& from, const std::string& to) const;
+	void addSpriteinList(Sprite *newSprite);
 
 	SDL_Renderer *_renderer;
 	SDL_Texture *_frameTexture;
-	std::vector<Sprite*> _spriteList;
+	std::list<Sprite*> _spriteList;
 	std::map<std::string, Sprite*> _cardList;
 };
 
