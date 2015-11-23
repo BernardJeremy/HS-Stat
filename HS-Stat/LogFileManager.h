@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <iostream>
 
 #define LOG_FILE_LOCATION "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data"
 #define LOG_FILE_NAME "output_log_test.txt"
@@ -22,9 +23,11 @@ public:
 
 private:
 	unsigned int getFileSize() const;
+	
 
 private:
 	unsigned int _lastSize;
+	
 
 };
 

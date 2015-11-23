@@ -2,14 +2,15 @@
 #include <WinBase.h>
 #include "LogFileManager.h"
 #include "SdlDisplayer.h"
+#include "CardDataManager.h"
 
 int main(int, char**){
 	LogFileManager *logFileManager = new LogFileManager;
 	SdlDisplayer *displayer = new SdlDisplayer;
+	CardDataManager * cardDataManager = new CardDataManager;
 	bool loop = true;
 
-	logFileManager->init();
-	if (!displayer->init()){
+	if (!cardDataManager->init() || !logFileManager->init() || !displayer->init()){
 		loop = false;
 	}
 
@@ -22,9 +23,16 @@ int main(int, char**){
 			list = logFileManager->getNewText();
 			for (auto line : list)
 			{
-				std::cout << line << std::endl;
-				displayer->addCard(line, "2", "rare", true);
-				displayer->addCard(line, "4", "legendary", false);
+				if (line.empty())
+					continue;
+				std::string name;
+				std::string cost;
+				std::string rarity;
+				bool localPlayer = true;
+
+				cardDataManager->getDataFromId("EX1_116", name, rarity, cost);
+				displayer->addCard(name, cost, rarity, true);
+				displayer->addCard(name, cost, rarity, false);
 			}
 		}
 

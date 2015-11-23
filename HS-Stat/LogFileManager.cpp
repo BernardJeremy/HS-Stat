@@ -13,7 +13,8 @@ LogFileManager::~LogFileManager()
 bool LogFileManager::init()
 {
 	if (!isFileExist())
-		return false;
+		return true;
+
 	_lastSize = getFileSize();
 	return true;
 }
@@ -56,3 +57,4 @@ unsigned int LogFileManager::getFileSize() const
 		return 0;
 	return buffer.st_size;
 }
+
