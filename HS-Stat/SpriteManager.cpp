@@ -89,6 +89,8 @@ void SpriteManager::eraseAllSprite(bool eraseAll)
 
 bool SpriteManager::addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer)
 {
+	if (cardName.empty())
+		return false;
 	std::string testName(cardName);
 	testName += "_#";
 	testName += (isLocalPlayer ? "1" : "2");
@@ -101,6 +103,11 @@ bool SpriteManager::addCard(std::string cardName, std::string cost, std::string 
 		std::string realCardName(cardName);
 
 		sprite->setImage(AddImage(cardNameToFileName(cardName)));
+		if (!sprite->getImage())
+		{
+			delete sprite;
+			return false;
+		}
 		sprite->setFrame(AddFrame());
 		sprite->setText(AddText(realCardName));
 		sprite->setCost(AddText(cost));

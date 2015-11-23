@@ -21,6 +21,7 @@ public:
 	void cleanup();
 	bool manageInput();
 	bool draw();
+	bool addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer);
 
 private:
 	SDL_Window *_screen;

@@ -74,14 +74,14 @@ bool SdlDisplayer::manageInput()
 				_spriteManager->eraseAllSprite();
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN){
-			_spriteManager->addCard("Leper Gnome", "1", "common", true);
+			/*_spriteManager->addCard("Leper Gnome", "1", "common", true);
 			_spriteManager->addCard("Leper Gnome", "1", "common", false);
 			_spriteManager->addCard("Wolfrider", "3", "epic", false);
 			_spriteManager->addCard("Gazlowe", "0", "rare", false);
 			_spriteManager->addCard("Gazlowe", "0", "rare", true);
 			_spriteManager->addCard("Wolfrider", "3", "epic", true);
 			_spriteManager->addCard("Elven Archer", "2", "legendary", true);
-			_spriteManager->addCard("Elven Archer", "2", "legendary", false);
+			_spriteManager->addCard("Elven Archer", "2", "legendary", false);*/
 			return true;
 		}
 	}
@@ -94,8 +94,6 @@ bool SdlDisplayer::draw()
 
 	if (firstTime) {
 		firstTime = false;
-		_spriteManager->addCard("Leper Gnome", "1", "common", true);
-		_spriteManager->addCard("Leper Gnome", "1", "common", false);
 	}
 
 	SDL_SetRenderDrawColor(_renderer, 14, 25, 55, 255);
@@ -107,4 +105,9 @@ bool SdlDisplayer::draw()
 
 	SDL_Delay(1);
 	return true;
+}
+
+bool SdlDisplayer::addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer)
+{
+	return _spriteManager->addCard(cardName, cost, cardRarity, isLocalPlayer);
 }
