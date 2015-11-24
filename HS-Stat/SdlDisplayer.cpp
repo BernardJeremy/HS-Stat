@@ -73,17 +73,6 @@ bool SdlDisplayer::manageInput()
 			else
 				_spriteManager->eraseAllSprite();
 		}
-		if (e.type == SDL_MOUSEBUTTONDOWN){
-			/*_spriteManager->addCard("Leper Gnome", "1", "common", true);
-			_spriteManager->addCard("Leper Gnome", "1", "common", false);
-			_spriteManager->addCard("Wolfrider", "3", "epic", false);
-			_spriteManager->addCard("Gazlowe", "0", "rare", false);
-			_spriteManager->addCard("Gazlowe", "0", "rare", true);
-			_spriteManager->addCard("Wolfrider", "3", "epic", true);
-			_spriteManager->addCard("Elven Archer", "2", "legendary", true);
-			_spriteManager->addCard("Elven Archer", "2", "legendary", false);*/
-			return true;
-		}
 	}
 	return true;
 }

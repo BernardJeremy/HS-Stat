@@ -3,6 +3,7 @@
 
 LogFileManager::LogFileManager()
 {
+	_lastSize = 0;
 }
 
 
@@ -51,10 +52,14 @@ std::vector<std::string> LogFileManager::getNewText(bool saveNewSize)
 
 unsigned int LogFileManager::getFileSize() const
 {
-	struct stat buffer;
-	
-	if (stat(LOG_FILE_PATH, &buffer) != 0)
-		return 0;
-	return buffer.st_size;
+	std::ifstream is;
+	unsigned int length = 0;
+
+	is.open(LOG_FILE_PATH, std::ios::binary);
+	is.seekg(0, std::ios::end);
+	length = is.tellg();
+	is.close();
+
+	return(length);
 }
 

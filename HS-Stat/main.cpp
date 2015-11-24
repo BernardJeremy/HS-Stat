@@ -3,11 +3,13 @@
 #include "LogFileManager.h"
 #include "SdlDisplayer.h"
 #include "CardDataManager.h"
+#include "Parser.h"
 
 int main(int, char**){
 	LogFileManager *logFileManager = new LogFileManager;
 	SdlDisplayer *displayer = new SdlDisplayer;
-	CardDataManager * cardDataManager = new CardDataManager;
+	CardDataManager *cardDataManager = new CardDataManager;
+	Parser *parser = new Parser;
 	bool loop = true;
 
 	if (!cardDataManager->init() || !logFileManager->init() || !displayer->init()){
@@ -23,16 +25,17 @@ int main(int, char**){
 			list = logFileManager->getNewText();
 			for (auto line : list)
 			{
-				if (line.empty())
-					continue;
 				std::string name;
 				std::string cost;
 				std::string rarity;
+				std::string id;
 				bool localPlayer = true;
 
-				cardDataManager->getDataFromId("EX1_116", name, rarity, cost);
-				displayer->addCard(name, cost, rarity, true);
-				displayer->addCard(name, cost, rarity, false);
+				if (line.empty() || !parser->getIdFromLine(line, id, localPlayer))
+					continue;
+
+				cardDataManager->getDataFromId(id, name, rarity, cost);
+				displayer->addCard(name, cost, rarity, localPlayer);
 			}
 		}
 
@@ -40,9 +43,11 @@ int main(int, char**){
 	}
 
 	displayer->cleanup();
+	
 	delete displayer;
-
 	delete logFileManager;
+	delete cardDataManager;
+	delete parser;
 
 	return 0;
 }

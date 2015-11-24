@@ -95,7 +95,6 @@ bool SpriteManager::addCard(std::string cardName, std::string cost, std::string 
 	testName += "_#";
 	testName += (isLocalPlayer ? "1" : "2");
 	if (_cardList.find(testName) != _cardList.end()) {
-		std::cout << "CARD FIND" << std::endl;
 		_cardList.find(testName)->second->incNbrPlayed();
 	}
 	else {
@@ -117,7 +116,6 @@ bool SpriteManager::addCard(std::string cardName, std::string cost, std::string 
 
 		addSpriteinList(sprite);
 		_cardList.insert(std::pair<std::string, Sprite*>(testName, sprite));
-		std::cout << "NEW CARD : " << testName << std::endl;
 	}
 
 	return true;
@@ -158,6 +156,8 @@ SDL_Texture *SpriteManager::AddRarityGem(std::string &cardRarity, Sprite *sprite
 {
 
 	std::string fileName = "gem_rarity_";
+	if (cardRarity.compare("Free") == 0 || cardRarity.compare("0") == 0)
+		cardRarity = "Common";
 	fileName += cardNameToFileName(cardRarity);
 
 	if (cardRarity.compare("legendary.png") == 0)

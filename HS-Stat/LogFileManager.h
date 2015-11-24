@@ -5,10 +5,9 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include <stdio.h>
 
-#define LOG_FILE_LOCATION "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data"
-#define LOG_FILE_NAME "output_log_test.txt"
-#define LOG_FILE_PATH "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data\\output_log_test.txt"
+#define LOG_FILE_PATH "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data\\output_log.txt"
 
 class LogFileManager
 {
