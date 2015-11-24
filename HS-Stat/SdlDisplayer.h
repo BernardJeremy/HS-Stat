@@ -5,6 +5,7 @@
 
 #include "ImageManager.h"
 #include "SpriteManager.h"
+#include "Parser.h"
 
 #define SCREEN_TITLE "HS-Stat by Corelan"
 
@@ -19,7 +20,7 @@ public:
 
 	bool init();
 	void cleanup();
-	bool manageInput();
+	bool manageInput(Parser *parser);
 	bool draw();
 	bool addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer);
 

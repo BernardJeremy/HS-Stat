@@ -60,18 +60,21 @@ void SdlDisplayer::cleanup()
 	SDL_Quit();
 }
 
-bool SdlDisplayer::manageInput()
+bool SdlDisplayer::manageInput(Parser *parser)
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)){
 		if (e.type == SDL_QUIT){
 			return false;
 		}
-		if (e.type == SDL_KEYDOWN){
+		if (e.type == SDL_KEYUP){
 			if (e.key.keysym.sym == SDLK_ESCAPE)
 				return false;
-			else
+			else if (e.key.keysym.sym == SDLK_e)
+			{
 				_spriteManager->eraseAllSprite();
+				parser->clearSaveId();
+			}
 		}
 	}
 	return true;

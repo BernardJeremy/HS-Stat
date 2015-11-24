@@ -18,7 +18,7 @@ int main(int, char**){
 
 	while (loop)
 	{
-		loop = displayer->manageInput();
+		loop = displayer->manageInput(parser);
 		if (logFileManager->isFileChange())
 		{
 			std::vector<std::string> list;

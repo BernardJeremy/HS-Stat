@@ -20,7 +20,16 @@ bool Parser::getIdFromLine(const std::string & line, std::string &cardId, bool &
 		size_t pos3 = line.find("zone from OPPOSING HAND");
 		if (pos3 == std::string::npos)
 		{
-			return false;
+			pos3 = line.find("zone from OPPOSING SECRET");
+			if (pos3 == std::string::npos)
+			{
+				return false;
+			}
+			else {
+				pos3 = line.find("zone=SECRET");
+				if (pos3 == std::string::npos)
+					return false;
+			}
 		}
 		else {
 			pos3 = line.find("zone=PLAY");
