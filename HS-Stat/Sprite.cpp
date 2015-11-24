@@ -39,6 +39,11 @@ SDL_Texture *Sprite::getRarityGem() const
 	return _rarityGem;
 }
 
+const std::string &Sprite::getCardName() const
+{
+	return _cardName;
+}
+
 int Sprite::getDecalXPixel() const
 {
 	return _decalXPixel;
@@ -82,6 +87,11 @@ void Sprite::setCost(SDL_Texture *cost)
 void Sprite::setRarityGem(SDL_Texture *rarityGem)
 {
 	_rarityGem = rarityGem;
+}
+
+void Sprite::setCardName(const std::string &cardName)
+{
+	_cardName = cardName;
 }
 
 void Sprite::setDecalXPixel(int decalXPixel)

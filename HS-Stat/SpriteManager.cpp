@@ -55,7 +55,11 @@ bool SpriteManager::drawAllSprite() const
 		///////////////////////////////////
 		// [TEXT] RENDERING
 		///////////////////////////////////
-		ImageManager::renderImage(_renderer, current->getText(), decalX + X_DECAL_TEXT, decalY + 4, H_FRAME - 10, W_FRAME - X_DECAL_TEXT - 100);
+		int textWidth = current->getCardName().length() * 7;
+		int maxTextWidth = W_FRAME - X_DECAL_TEXT;
+		maxTextWidth -= (current->getNbrPlayed() > 1 || current->isLegendary() ? W_NUMBER_BOX : 0);
+		textWidth = (textWidth > maxTextWidth ? maxTextWidth : textWidth);
+		ImageManager::renderImage(_renderer, current->getText(), decalX + X_DECAL_TEXT, decalY + 4, H_FRAME - 10, textWidth);
 		///////////////////////////////////
 		// [COST] RENDERING
 		///////////////////////////////////
@@ -109,6 +113,7 @@ bool SpriteManager::addCard(std::string cardName, std::string cost, std::string 
 		}
 		sprite->setFrame(AddFrame());
 		sprite->setText(AddText(realCardName));
+		sprite->setCardName(realCardName);
 		sprite->setCost(AddText(cost));
 		sprite->setRarityGem(AddRarityGem(cardRarity, sprite));
 		sprite->setManaCost(std::stoi(cost));
@@ -139,8 +144,8 @@ SDL_Texture *SpriteManager::AddImage(std::string &fileName) const
 SDL_Texture *SpriteManager::AddText(std::string &cardName) const
 {
 	std::string fontPath = SDL_GetBasePath();
-	fontPath += "hs.ttf";
-	TTF_Font* font = TTF_OpenFont(fontPath.c_str(), 24);
+	fontPath += "1553.ttf";
+	TTF_Font* font = TTF_OpenFont(fontPath.c_str(), 48);
 	if (!font)
 	{
 		std::cout << "TTF_Init Error : " << TTF_GetError() << std::endl;
