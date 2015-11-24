@@ -16,7 +16,7 @@ bool LogFileManager::init()
 	if (!isFileExist())
 		return true;
 
-	//_lastSize = getFileSize();
+	_lastSize = getFileSize();
 	return true;
 }
 
