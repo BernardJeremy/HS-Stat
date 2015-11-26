@@ -11,6 +11,7 @@ public:
 	~Parser();
 
 	bool getIdFromLine(const std::string &line, std::string &cardId, bool &localPlayer);
+	bool isnewGame(const std::string &line);
 	void clearSaveId();
 
 private:

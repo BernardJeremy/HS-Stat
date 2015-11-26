@@ -32,7 +32,14 @@ int main(int, char**){
 				bool localPlayer = true;
 
 				if (line.empty() || !parser->getIdFromLine(line, id, localPlayer))
+				{
+					if (parser->isnewGame(line))
+					{
+						displayer->eraseAllSprite();
+						parser->clearSaveId();
+					}
 					continue;
+				}
 
 				cardDataManager->getDataFromId(id, name, rarity, cost);
 				displayer->addCard(name, cost, rarity, localPlayer);

@@ -6,7 +6,6 @@ LogFileManager::LogFileManager()
 	_lastSize = 0;
 }
 
-
 LogFileManager::~LogFileManager()
 {
 }
@@ -36,7 +35,7 @@ std::vector<std::string> LogFileManager::getNewText(bool saveNewSize)
 	std::ifstream infile(LOG_FILE_PATH);
 	std::vector<std::string> list;
 	std::string line;
-	int index = _lastSize;
+	long long index = _lastSize;
 
 	infile.seekg(index);
 	while (std::getline(infile, line))
@@ -50,10 +49,10 @@ std::vector<std::string> LogFileManager::getNewText(bool saveNewSize)
 	return list;
 }
 
-unsigned int LogFileManager::getFileSize() const
+long long LogFileManager::getFileSize() const
 {
 	std::ifstream is;
-	unsigned int length = 0;
+	long long length = 0;
 
 	is.open(LOG_FILE_PATH, std::ios::binary);
 	is.seekg(0, std::ios::end);

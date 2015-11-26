@@ -22,7 +22,8 @@ public:
 	void cleanup();
 	bool manageInput(Parser *parser);
 	bool draw();
-	bool addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer);
+	bool addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer) const;
+	void eraseAllSprite() const;
 
 private:
 	SDL_Window *_screen;

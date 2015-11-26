@@ -99,7 +99,12 @@ bool SdlDisplayer::draw()
 	return true;
 }
 
-bool SdlDisplayer::addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer)
+bool SdlDisplayer::addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer) const
 {
 	return _spriteManager->addCard(cardName, cost, cardRarity, isLocalPlayer);
+}
+
+void SdlDisplayer::eraseAllSprite() const
+{
+	_spriteManager->eraseAllSprite();
 }

@@ -12,6 +12,21 @@ Parser::~Parser()
 	clearSaveId();
 }
 
+bool Parser::isnewGame(const std::string &line)
+{
+	size_t pos2 = line.find("to OPPOSING PLAY (Hero)");
+	if (pos2 == std::string::npos)
+	{
+		pos2 = line.find("to FRIENDLY PLAY (Hero)");
+		if (pos2 == std::string::npos)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 bool Parser::getIdFromLine(const std::string & line, std::string &cardId, bool &localPlayer)
 {
 	size_t pos2 = line.find("zone from FRIENDLY HAND");

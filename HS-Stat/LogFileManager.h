@@ -21,11 +21,11 @@ public:
 	std::vector<std::string> getNewText(bool saveNewSize = true);
 
 private:
-	unsigned int getFileSize() const;
+	long long getFileSize() const;
 	
 
 private:
-	unsigned int _lastSize;
+	long long _lastSize;
 	
 
 };
