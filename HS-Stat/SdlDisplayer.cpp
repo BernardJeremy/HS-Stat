@@ -16,10 +16,21 @@ SdlDisplayer::~SdlDisplayer()
 bool SdlDisplayer::init()
 {
 	SDL_Init(SDL_INIT_VIDEO);
+
+	SDL_DisplayMode dm;
+	int windowXPos = SDL_WINDOWPOS_CENTERED;
+	int widowHeight = SCREEN_HEIGHT;
+	if (SDL_GetDesktopDisplayMode(0, &dm) == 0) {
+		windowXPos = dm.w - SCREEN_WIDTH;
+		widowHeight = dm.h;
+	}
+	else {
+		std::cout << "SDL_GetDesktopDisplayMode failed: " << SDL_GetError() << std::endl;
+	}
+
 	_screen = SDL_CreateWindow(SCREEN_TITLE,
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		SCREEN_WIDTH, SCREEN_HEIGHT,
+		windowXPos,	15,
+		SCREEN_WIDTH, widowHeight,
 		SDL_WINDOW_SHOWN);
 
 	_renderer = SDL_CreateRenderer(_screen, -1, SDL_RENDERER_PRESENTVSYNC);
