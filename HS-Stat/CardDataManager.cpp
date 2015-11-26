@@ -72,7 +72,7 @@ bool CardDataManager::setAllCardJSON()
 	if (in)
 	{
 		in.seekg(0, std::ios::end);
-		_cardsData.resize(in.tellg());
+		_cardsData.resize((unsigned int)in.tellg());
 		in.seekg(0, std::ios::beg);
 		in.read(&_cardsData[0], _cardsData.size());
 		in.close();
