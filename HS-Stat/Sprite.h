@@ -19,6 +19,7 @@ public:
 	int getNbrPlayed() const;
 	int getManaCost() const;
 	bool isLegendary() const;
+	bool isLocalPlayer() const;
 
 	void setFrame(SDL_Texture *frame);
 	void setImage(SDL_Texture *image);
@@ -31,6 +32,7 @@ public:
 	void incNbrPlayed();
 	void setManaCost(int manaCost);
 	void setIsLegendary(bool isLegendary);
+	void setIsLocalPlayer(bool isLocalPlayer);
 
 private:
 	SDL_Texture *_frame = NULL;
@@ -43,5 +45,6 @@ private:
 	int _nbrPlayed;
 	int _manaCost;
 	bool _isLegendary;
+	bool _isLocalPlayer;
 };
 

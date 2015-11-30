@@ -39,3 +39,21 @@ SDL_Texture *ImageManager::getTextureFromImage(SDL_Renderer *renderer, const std
 
 	return texture;
 }
+
+SDL_Texture *ImageManager::getTextureFromCard(SDL_Renderer *renderer, const std::string &imgName)
+{
+	SDL_Texture *texture;
+
+	std::string path = SDL_GetBasePath();
+	path += CARD_REL_PATH;
+	path += imgName;
+	path += ".png";
+
+	texture = IMG_LoadTexture(renderer, path.c_str());
+	if (!texture) {
+		std::cout << "IMG_Load: " << IMG_GetError() << std::endl;
+		return NULL;
+	}
+
+	return texture;
+}

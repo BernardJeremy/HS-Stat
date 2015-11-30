@@ -64,6 +64,11 @@ bool Sprite::isLegendary() const
 	return _isLegendary;
 }
 
+bool Sprite::isLocalPlayer() const
+{
+	return _isLocalPlayer;
+}
+
 void Sprite::setFrame(SDL_Texture *frame)
 {
 	_frame = frame;
@@ -117,4 +122,9 @@ void Sprite::incNbrPlayed()
 void Sprite::setIsLegendary(bool isLegendary)
 {
 	_isLegendary = isLegendary;
+}
+
+void Sprite::setIsLocalPlayer(bool isLocalPlayer)
+{
+	_isLocalPlayer = isLocalPlayer;
 }

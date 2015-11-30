@@ -9,6 +9,9 @@
 #include "ImageManager.h"
 #include "Sprite.h"
 
+#define SCREEN_WIDTH 440
+#define SCREEN_HEIGHT 1050
+
 #define W_IMAGE 110
 #define H_IMAGE 35
 
@@ -45,6 +48,7 @@ public:
 	bool addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer);
 	bool drawAllSprite() const;
 	void eraseAllSprite(bool eraseAll = false);
+	const std::list<Sprite*> *getSpriteList() const;
 
 private:
 	SDL_Texture *AddFrame();

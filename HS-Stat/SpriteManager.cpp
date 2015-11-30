@@ -91,6 +91,11 @@ void SpriteManager::eraseAllSprite(bool eraseAll)
 	_cardList.clear();
 }
 
+const std::list<Sprite*> *SpriteManager::getSpriteList() const
+{
+	return &_spriteList;
+}
+
 bool SpriteManager::addCard(std::string cardName, std::string cost, std::string cardRarity, bool isLocalPlayer)
 {
 	if (cardName.empty())
@@ -117,11 +122,12 @@ bool SpriteManager::addCard(std::string cardName, std::string cost, std::string 
 		sprite->setCost(AddText(cost));
 		sprite->setRarityGem(AddRarityGem(cardRarity, sprite));
 		sprite->setManaCost(std::stoi(cost));
+		sprite->setIsLocalPlayer(isLocalPlayer);
 		sprite->setDecalXPixel(isLocalPlayer ? 0 : SpriteManager::POS_X_ZONE + SpriteManager::W_LOCAL_ZONE + SpriteManager::DECAL_ZONE);
 
 		addSpriteinList(sprite);
 		_cardList.insert(std::pair<std::string, Sprite*>(testName, sprite));
-	}
+	}	
 
 	return true;
 }

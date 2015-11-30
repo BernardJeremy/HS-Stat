@@ -4,6 +4,8 @@
 SdlDisplayer::SdlDisplayer()
 {
 	_spriteManager = NULL;
+	_cardDisplay = NULL;
+	_currentMode = SdlDisplayer::DECK;
 }
 
 
@@ -11,6 +13,8 @@ SdlDisplayer::~SdlDisplayer()
 {
 	if (_spriteManager)
 		delete _spriteManager;
+	if (_cardDisplay)
+		delete _cardDisplay;
 }
 
 bool SdlDisplayer::init()
@@ -42,6 +46,7 @@ bool SdlDisplayer::init()
 	}
 
 	_spriteManager = new SpriteManager(this->_renderer);
+	_cardDisplay = new CardDisplay(this->_renderer, _spriteManager);
 
 
 	// load support for the PNG image formats
@@ -71,7 +76,7 @@ void SdlDisplayer::cleanup()
 	SDL_Quit();
 }
 
-bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager) const
+bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager)
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)){
@@ -81,17 +86,33 @@ bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager) c
 		if (e.type == SDL_KEYUP){
 			if (e.key.keysym.sym == SDLK_ESCAPE)
 				return false;
+			else if (e.key.keysym.sym == SDLK_SPACE)
+			{
+				this->switchMode();
+			}
 			else if (e.key.keysym.sym == SDLK_e)
 			{
 				_spriteManager->eraseAllSprite();
 				parser->clearSaveId();
 				logFileManager->resetSzeFromLastGame();
 			}
-			else if (e.key.keysym.sym == SDLK_r)
-			{
-				_spriteManager->eraseAllSprite();
-				parser->clearSaveId();
-				logFileManager->resetLastSize();
+		}
+		if (e.type == SDL_WINDOWEVENT) {
+			switch (e.window.event) {
+				case SDL_WINDOWEVENT_ENTER:
+					_cardDisplay->setHasFocus(true);
+					break;
+				case SDL_WINDOWEVENT_LEAVE:
+					_cardDisplay->setHasFocus(false);
+					break;
+				case SDL_WINDOWEVENT_FOCUS_GAINED:
+					_cardDisplay->setHasFocus(true);
+					break;
+				case SDL_WINDOWEVENT_FOCUS_LOST:
+					_cardDisplay->setHasFocus(false);
+					break;
+				default:
+					break;
 			}
 		}
 	}
@@ -109,7 +130,11 @@ bool SdlDisplayer::draw()
 	SDL_SetRenderDrawColor(_renderer, 14, 25, 55, 255);
 	SDL_RenderClear(_renderer);
 
-	_spriteManager->drawAllSprite();
+	if (_currentMode == SdlDisplayer::DECK)
+	{
+		_spriteManager->drawAllSprite();
+		_cardDisplay->checkMousePosition();
+	}
 
 	SDL_RenderPresent(_renderer);
 
@@ -125,4 +150,12 @@ bool SdlDisplayer::addCard(std::string cardName, std::string cost, std::string c
 void SdlDisplayer::eraseAllSprite() const
 {
 	_spriteManager->eraseAllSprite();
+}
+
+void SdlDisplayer::switchMode()
+{
+	if (_currentMode == SdlDisplayer::DECK)
+		_currentMode = SdlDisplayer::BUTTON;
+	else
+		_currentMode = SdlDisplayer::DECK;
 }
