@@ -18,7 +18,7 @@ int main(int, char**){
 
 	while (loop)
 	{
-		loop = displayer->manageInput(parser);
+		loop = displayer->manageInput(parser, logFileManager);
 		if (logFileManager->isFileChange())
 		{
 			std::vector<std::string> list;
@@ -37,6 +37,7 @@ int main(int, char**){
 					{
 						displayer->eraseAllSprite();
 						parser->clearSaveId();
+						logFileManager->updateSizeFromLastGame();
 					}
 					continue;
 				}

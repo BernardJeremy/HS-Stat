@@ -29,6 +29,7 @@ void CardDataManager::getDataFromId(std::string cardID, std::string &name, std::
 	}
 
 	name = extractDataFromString(content, "\"name\":\"");
+	std::cout << "NAME : " << name << std::endl << "----------------" << std::endl;
 	rarity = extractDataFromString(content, "\"rarity\":\"");
 	cost = extractDataFromString(content, "\"cost\":", true);
 }
@@ -41,7 +42,6 @@ std::string CardDataManager::extractDataFromString(std::string content, std::str
 	size_t pos2 = content.find("\"", pos + key.length());
 	std::string ret = content.substr(pos + key.length(), pos2 - pos - key.length() - (int)isInt);
 
-	std::cout << key << " : " << ret << std::endl;
 	return ret;
 }
 
@@ -50,7 +50,7 @@ std::string CardDataManager::getStringData(std::string cardID) const
 	std::string needle = "\"id\":\"";
 	needle += cardID;
 	needle += "\"";
-	std::cout << "START ANALYSE JSON FOR " << needle << std::endl;
+	//std::cout << "START ANALYSE JSON FOR " << needle << std::endl;
 
 	size_t needlePos = _cardsData.find(needle);
 	if (needlePos == std::string::npos)
@@ -64,7 +64,7 @@ std::string CardDataManager::getStringData(std::string cardID) const
 
 bool CardDataManager::setAllCardJSON()
 {
-	std::cout << "\nSTART LOADING JSON" << std::endl;
+	std::cout << "START LOADING JSON" << std::endl;
 	std::string filePath = CardDataManager::getCurrentDir() + DATA_FILE_NAME;
 	std::cout << filePath << std::endl;
 	std::ifstream in(filePath, std::ios::in | std::ios::binary);

@@ -71,7 +71,7 @@ void SdlDisplayer::cleanup()
 	SDL_Quit();
 }
 
-bool SdlDisplayer::manageInput(Parser *parser)
+bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager) const
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)){
@@ -85,6 +85,13 @@ bool SdlDisplayer::manageInput(Parser *parser)
 			{
 				_spriteManager->eraseAllSprite();
 				parser->clearSaveId();
+				logFileManager->resetSzeFromLastGame();
+			}
+			else if (e.key.keysym.sym == SDLK_r)
+			{
+				_spriteManager->eraseAllSprite();
+				parser->clearSaveId();
+				logFileManager->resetLastSize();
 			}
 		}
 	}

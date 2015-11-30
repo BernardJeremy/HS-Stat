@@ -37,9 +37,7 @@ bool Parser::getIdFromLine(const std::string & line, std::string &cardId, bool &
 		{
 			pos3 = line.find("zone from OPPOSING SECRET");
 			if (pos3 == std::string::npos)
-			{
 				return false;
-			}
 			else {
 				pos3 = line.find("zone=SECRET");
 				if (pos3 == std::string::npos)
@@ -58,12 +56,21 @@ bool Parser::getIdFromLine(const std::string & line, std::string &cardId, bool &
 			return false;
 	}
 
-	size_t pos4 = line.find(" id=");
+	size_t pos4 = line.find("name=");
+	pos4 = line.find(" id=", pos4 + 1);
 	if (pos4 == std::string::npos)
+	{
+		std::cout << "LINE : " << line << std::endl;
+		std::cout << "No UID" << std::endl;
 		return false;
+	}
 	size_t pos5 = line.find(" ", pos4 + 1);
 	if (pos5 == std::string::npos)
+	{
+		std::cout << "LINE : " << line << std::endl;
+		std::cout << "Not space found for UID" << std::endl;
 		return false;
+	}
 	std::string uid = line.substr(pos4 + 4, pos5 - pos4 - 4);
 	if (isIdAlreadySaved(uid))
 		return false;
@@ -71,21 +78,37 @@ bool Parser::getIdFromLine(const std::string & line, std::string &cardId, bool &
 
 	size_t pos6 = line.find(" cardId=");
 	if (pos6 == std::string::npos)
+	{
+		std::cout << "LINE : " << line << std::endl;
+		std::cout << "CardId not found" << std::endl;
 		return false;
+	}
 	size_t pos7 = line.find(" ", pos6 + 1);
 	if (pos7 == std::string::npos)
+	{
+		std::cout << "LINE : " << line << std::endl;
+		std::cout << "Not space found for cardID" << std::endl;
 		return false;
+	}
 	cardId = line.substr(pos6 + 8, pos7 - pos6 - 8);
 
 	size_t pos8 = line.find(" player=");
 	if (pos8 == std::string::npos)
+	{
+		std::cout << "LINE : " << line << std::endl;
+		std::cout << "Player not found" << std::endl;
 		return false;
+	}
 	size_t pos9 = line.find(" ", pos8);
 	if (pos9 == std::string::npos)
+	{
+		std::cout << "LINE : " << line << std::endl;
+		std::cout << "Not space found for player" << std::endl;
 		return false;
+	}
 	localPlayer = (line.substr(pos8 + 8, 1).compare("1") == 0 ? true : false);
 	
-	std::cout << "UID : " << uid << std::endl;
+	std::cout << "----------------" << std::endl << "UID : " << uid << std::endl;
 	std::cout << "CARD ID : " << cardId << std::endl;
 	std::cout << "LOCAL PLAYER ? : " << localPlayer << std::endl;
 
