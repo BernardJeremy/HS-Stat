@@ -37,6 +37,7 @@ int main(int, char**){
 					{
 						displayer->eraseAllSprite();
 						parser->clearSaveId();
+						std::cout << "----= NEW GAME =----" << std::endl;
 						logFileManager->updateSizeFromLastGame();
 					}
 					continue;

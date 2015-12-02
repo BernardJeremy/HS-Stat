@@ -94,7 +94,7 @@ bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager)
 			{
 				_spriteManager->eraseAllSprite();
 				parser->clearSaveId();
-				logFileManager->resetSzeFromLastGame();
+				logFileManager->updateSizeFromLastGame();
 			}
 		}
 		if (e.type == SDL_WINDOWEVENT) {

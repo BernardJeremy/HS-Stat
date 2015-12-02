@@ -28,19 +28,14 @@ bool LogFileManager::isFileExist() const
 	return (stat(LOG_FILE_PATH, &buffer) == 0);
 }
 
-bool LogFileManager::isFileChange() const
+bool LogFileManager::isFileChange()
 {
+	if (_lastSize > getFileSize())  {
+		_lastSize = getFileSize();
+		_sizeFromLastGame = getFileSize();
+	}
+
 	return (_lastSize != getFileSize());
-}
-
-void LogFileManager::resetLastSize()
-{
-	_lastSize = 0;
-}
-
-void LogFileManager::resetSzeFromLastGame()
-{
-	_sizeFromLastGame = getFileSize();
 }
 
 std::vector<std::string> LogFileManager::getNewText(bool saveNewSize)
@@ -49,6 +44,11 @@ std::vector<std::string> LogFileManager::getNewText(bool saveNewSize)
 	std::vector<std::string> list;
 	std::string line;
 	long long index = _sizeFromLastGame;
+
+	if (_sizeFromLastGame <= 0) {
+		_sizeFromLastGame = getFileSize();
+		index = _sizeFromLastGame;
+	}
 
 	infile.seekg(index);
 	while (std::getline(infile, line))
@@ -65,6 +65,7 @@ std::vector<std::string> LogFileManager::getNewText(bool saveNewSize)
 void LogFileManager::updateSizeFromLastGame()
 {
 	_sizeFromLastGame = getFileSize();
+	_lastSize = getFileSize();
 }
 
 long long LogFileManager::getFileSize() const

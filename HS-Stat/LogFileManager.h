@@ -17,16 +17,13 @@ public:
 
 	bool init();
 	bool isFileExist() const;
-	bool isFileChange() const;
+	bool isFileChange();
 	std::vector<std::string> getNewText(bool saveNewSize = true);
 	void updateSizeFromLastGame();
-	void resetLastSize();
-	void resetSzeFromLastGame();
 
 private:
 	long long getFileSize() const;
 	
-
 private:
 	long long _lastSize;
 	long long _sizeFromLastGame;
