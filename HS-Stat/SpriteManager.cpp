@@ -3,6 +3,7 @@
 
 SpriteManager::SpriteManager(SDL_Renderer *renderer) : _renderer(renderer), _frameTexture(NULL)
 {
+	_reverseDisplay = false;
 }
 
 
@@ -17,7 +18,7 @@ bool SpriteManager::drawAllSprite() const
 	int nbrSpriteLocal = 0;
 	int nbrSpriteOpp = 0;
 	for (it = _spriteList.begin(); it != _spriteList.end(); ++it) {
-		int decalX = SpriteManager::POS_X_ZONE + (*it)->getDecalXPixel();
+		int decalX = SpriteManager::POS_X_ZONE + (_reverseDisplay ? ((*it)->getDecalXPixel() == 0 ? SpriteManager::POS_X_ZONE + SpriteManager::W_LOCAL_ZONE + SpriteManager::DECAL_ZONE : 0) : (*it)->getDecalXPixel());
 		int decalMultY = (*it)->getDecalXPixel() > 0 ? nbrSpriteOpp : nbrSpriteLocal;
 		int decalY = SpriteManager::POS_Y_ZONE + (decalMultY * H_FRAME);
 		Sprite *current = (*it);
@@ -224,4 +225,9 @@ void SpriteManager::addSpriteinList(Sprite *newSprite)
 
 	if (!inserted)
 		_spriteList.push_back(newSprite);
+}
+
+void SpriteManager::reverseLocalPlayerCards()
+{
+	_reverseDisplay = (_reverseDisplay ? false : true);
 }
