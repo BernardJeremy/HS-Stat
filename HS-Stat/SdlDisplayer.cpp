@@ -94,6 +94,10 @@ bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager)
 			{
 				_spriteManager->reverseLocalPlayerCards();
 			}
+			else if (e.key.keysym.sym == SDLK_s)
+			{
+				logFileManager->resetFileIndex();
+			}
 			else if (e.key.keysym.sym == SDLK_e)
 			{
 				_spriteManager->eraseAllSprite();

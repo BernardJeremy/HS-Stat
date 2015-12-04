@@ -20,6 +20,7 @@ public:
 	bool isFileChange();
 	std::vector<std::string> getNewText(bool saveNewSize = true);
 	void updateSizeFromLastGame();
+	void resetFileIndex();
 
 private:
 	long long getFileSize() const;

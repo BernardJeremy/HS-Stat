@@ -68,6 +68,12 @@ void LogFileManager::updateSizeFromLastGame()
 	_lastSize = getFileSize();
 }
 
+void LogFileManager::resetFileIndex()
+{
+	_sizeFromLastGame = 1;
+	_lastSize = 1;
+}
+
 long long LogFileManager::getFileSize() const
 {
 	std::ifstream is;
