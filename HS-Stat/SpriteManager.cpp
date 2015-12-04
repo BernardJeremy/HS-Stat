@@ -231,3 +231,8 @@ void SpriteManager::reverseLocalPlayerCards()
 {
 	_reverseDisplay = (_reverseDisplay ? false : true);
 }
+
+bool SpriteManager::isReverseDisplay() const
+{
+	return _reverseDisplay;
+}

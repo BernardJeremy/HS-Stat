@@ -31,7 +31,13 @@ void CardDisplay::checkMousePosition() const
 	SDL_GetMouseState(&x, &y);
 
 	if (x >= SpriteManager::POS_X_ZONE + SpriteManager::W_LOCAL_ZONE + SpriteManager::DECAL_ZONE)
+	{
+		if (!_spriteManager->isReverseDisplay())
+			isLocalPlayer = false;
+	}
+	else if (_spriteManager->isReverseDisplay())
 		isLocalPlayer = false;
+
 	seek = y / H_FRAME;
 
 	for (it = spriteList->begin(); it != spriteList->end(); ++it) {

@@ -50,6 +50,7 @@ public:
 	void eraseAllSprite(bool eraseAll = false);
 	const std::list<Sprite*> *getSpriteList() const;
 	void reverseLocalPlayerCards(); 
+	bool isReverseDisplay() const;
 
 private:
 	SDL_Texture *AddFrame();
