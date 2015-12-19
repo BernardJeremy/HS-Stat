@@ -15,7 +15,7 @@ public:
 	void setHasFocus(bool hasFocus);
 
 private:
-	bool displayCard(int mouseX, int mouseY, const std::string &cardName) const;
+	bool displayCard(int mouseX, int mouseY, Sprite *sprite) const;
 
 private:
 	SDL_Renderer *_renderer;

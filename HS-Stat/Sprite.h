@@ -14,6 +14,7 @@ public:
 	SDL_Texture *getText() const;
 	SDL_Texture *getCost() const;
 	SDL_Texture *getRarityGem() const;
+	SDL_Texture *getFullCard() const;
 	const std::string &getCardName() const;
 	int getDecalXPixel() const;
 	int getNbrPlayed() const;
@@ -26,6 +27,7 @@ public:
 	void setText(SDL_Texture *text);
 	void setCost(SDL_Texture *cost);
 	void setRarityGem(SDL_Texture *rarityGem);
+	void setFullCard(SDL_Texture *fullCard);
 	void setCardName(const std::string &cardName);
 	void setDecalXPixel(int decalXPixel);
 	void setNbrPlayed(int nbrPlayed);
@@ -40,6 +42,7 @@ private:
 	SDL_Texture *_text = NULL;
 	SDL_Texture *_cost = NULL;
 	SDL_Texture *_rarityGem = NULL;
+	SDL_Texture *_fullCard = NULL;
 	std::string _cardName;
 	int _decalXPixel;
 	int _nbrPlayed;

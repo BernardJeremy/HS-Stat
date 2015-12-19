@@ -49,14 +49,17 @@ void CardDisplay::checkMousePosition() const
 	}
 	if (it == spriteList->end())
 		return;
-	this->displayCard(x, y, current->getCardName());
+	this->displayCard(x, y, current);
 }
 
-bool CardDisplay::displayCard(int mouseX, int mouseY, const std::string &cardName) const
+bool CardDisplay::displayCard(int mouseX, int mouseY, Sprite *sprite) const
 {
 	SDL_Texture *cardTexture = NULL;
 
-	cardTexture = ImageManager::getTextureFromCard(_renderer, cardName);
+	if (!sprite->getFullCard())
+		sprite->setFullCard(ImageManager::getTextureFromCard(_renderer, sprite->getCardName()));
+
+	cardTexture = sprite->getFullCard();
 
 	if (cardTexture)
 	{

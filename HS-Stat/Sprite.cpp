@@ -12,6 +12,11 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
+	SDL_DestroyTexture(_image);
+	SDL_DestroyTexture(_text);
+	SDL_DestroyTexture(_cost);
+	SDL_DestroyTexture(_rarityGem);
+	SDL_DestroyTexture(_fullCard);
 }
 
 SDL_Texture *Sprite::getFrame() const
@@ -37,6 +42,11 @@ SDL_Texture *Sprite::getCost() const
 SDL_Texture *Sprite::getRarityGem() const
 {
 	return _rarityGem;
+}
+
+SDL_Texture *Sprite::getFullCard() const
+{
+	return _fullCard;
 }
 
 const std::string &Sprite::getCardName() const
@@ -97,6 +107,11 @@ void Sprite::setRarityGem(SDL_Texture *rarityGem)
 void Sprite::setCardName(const std::string &cardName)
 {
 	_cardName = cardName;
+}
+
+void Sprite::setFullCard(SDL_Texture *fullCard)
+{
+	_fullCard = fullCard;
 }
 
 void Sprite::setDecalXPixel(int decalXPixel)
