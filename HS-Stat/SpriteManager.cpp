@@ -4,12 +4,17 @@
 SpriteManager::SpriteManager(SDL_Renderer *renderer) : _renderer(renderer), _frameTexture(NULL)
 {
 	_reverseDisplay = false;
+	this->initNumberTextureVector();
+	_numberBoxTexture = ImageManager::getTextureFromImage(_renderer, "frame_countbox.png");
+	_frameTexture = ImageManager::getTextureFromImage(_renderer, "frame.png");
+	_starTexture = ImageManager::getTextureFromImage(_renderer, "frame_legendary.png");
 }
 
 
 SpriteManager::~SpriteManager()
 {
 	this->eraseAllSprite(true);
+	SDL_DestroyTexture(_starTexture);
 }
 
 bool SpriteManager::drawAllSprite() const
@@ -37,17 +42,12 @@ bool SpriteManager::drawAllSprite() const
 		if (current->getNbrPlayed() > 1 || current->isLegendary()) {
 			if (current->getNbrPlayed() > 9)
 				current->setNbrPlayed(9);
-			SDL_Texture *numberBoxTexture = ImageManager::getTextureFromImage(_renderer, "frame_countbox.png");
-			ImageManager::renderImage(_renderer, numberBoxTexture, decalX + W_FRAME - W_NUMBER_BOX - 5, decalY + 6, H_NUMBER_BOX, W_NUMBER_BOX);
+
+			ImageManager::renderImage(_renderer, _numberBoxTexture, decalX + W_FRAME - W_NUMBER_BOX - 5, decalY + 6, H_NUMBER_BOX, W_NUMBER_BOX);
 			
-			std::string labelFileName = current->isLegendary() ? "legendary" : std::to_string(current->getNbrPlayed());
-			std::string nbrFileName = "frame_" + labelFileName + ".png";
-			
-			SDL_Texture *numberTexture = ImageManager::getTextureFromImage(_renderer, nbrFileName);
+			SDL_Texture *numberTexture = current->isLegendary() ? _starTexture : _numberTextureList.at(current->getNbrPlayed() - 2);
 			ImageManager::renderImage(_renderer, numberTexture, decalX + W_FRAME - W_NUMBER_BOX + 1, decalY + 8, H_NUMBER, W_NUMBER);
 
-			SDL_DestroyTexture(numberBoxTexture);
-			SDL_DestroyTexture(numberTexture);
 		}
 		///////////////////////////////////
 		// [RARITY] RENDERING
@@ -86,6 +86,13 @@ void SpriteManager::eraseAllSprite(bool eraseAll)
 		if (eraseAll)
 			SDL_DestroyTexture((*it)->getFrame());
 		delete (*it);
+	}
+
+	if (eraseAll) {
+		for (unsigned int i = 0; i < _numberTextureList.size(); ++i) {
+			SDL_DestroyTexture(_numberTextureList.at(i));
+		}
+		_numberTextureList.clear();
 	}
 
 	_spriteList.clear();
@@ -135,9 +142,6 @@ bool SpriteManager::addCard(std::string cardName, std::string cost, std::string 
 
 SDL_Texture *SpriteManager::AddFrame()
 {
-	if (!_frameTexture)
-		_frameTexture = ImageManager::getTextureFromImage(_renderer, "frame.png");
-
 	return _frameTexture;
 }
 
@@ -235,4 +239,13 @@ void SpriteManager::reverseLocalPlayerCards()
 bool SpriteManager::isReverseDisplay() const
 {
 	return _reverseDisplay;
+}
+
+void SpriteManager::initNumberTextureVector()
+{
+	for (int i = 2; i <= 9; ++i) {
+		std::string labelFileName = std::to_string(i);
+		std::string nbrFileName = "frame_" + labelFileName + ".png";
+		_numberTextureList.push_back(ImageManager::getTextureFromImage(_renderer, nbrFileName));
+	}
 }

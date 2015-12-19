@@ -57,6 +57,7 @@ private:
 	SDL_Texture *AddImage(std::string &fileName) const;
 	SDL_Texture *AddText(std::string &cardName) const;
 	SDL_Texture *AddRarityGem(std::string &cardRarity, Sprite *sprite) const;
+	void initNumberTextureVector();
 
 	std::string cardNameToFileName(std::string &cardName) const;
 
@@ -65,8 +66,11 @@ private:
 
 	SDL_Renderer *_renderer;
 	SDL_Texture *_frameTexture;
+	SDL_Texture *_numberBoxTexture;
+	SDL_Texture *_starTexture;
 	std::list<Sprite*> _spriteList;
 	std::map<std::string, Sprite*> _cardList;
+	std::vector<SDL_Texture*> _numberTextureList;
 	bool _reverseDisplay;
 };
 
