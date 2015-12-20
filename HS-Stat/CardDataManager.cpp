@@ -29,9 +29,11 @@ void CardDataManager::getDataFromId(std::string cardID, std::string &name, std::
 	}
 
 	name = extractDataFromString(content, "\"name\":\"");
-	std::cout << "NAME : " << name << std::endl << "----------------" << std::endl;
+	std::cout << "NAME : " << name << std::endl;
 	rarity = extractDataFromString(content, "\"rarity\":\"");
+	std::cout << "RARITY : " << rarity << std::endl;
 	cost = extractDataFromString(content, "\"cost\":", true);
+	std::cout << "COST : " << cost << std::endl << "----------------" << std::endl;
 }
 
 std::string CardDataManager::extractDataFromString(std::string content, std::string key, bool isInt) const

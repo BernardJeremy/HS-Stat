@@ -219,11 +219,14 @@ void SpriteManager::addSpriteinList(Sprite *newSprite)
 		saveIt = it;
 		saveCost = current->getManaCost();
 
-		if (newSprite->getManaCost() < current->getManaCost())
+		if (newSprite->getManaCost() <= current->getManaCost())
 		{
-			_spriteList.insert(saveIt, newSprite);
-			inserted = true;
-			break;
+			if (newSprite->getManaCost() < current->getManaCost() || (newSprite->getManaCost() == current->getManaCost() && newSprite->getCardName().compare(current->getCardName()) < 0))
+			{
+				_spriteList.insert(saveIt, newSprite);
+				inserted = true;
+				break;
+			}
 		}
 	}
 
