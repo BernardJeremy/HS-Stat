@@ -105,24 +105,6 @@ bool SdlDisplayer::manageInput(Parser *parser, LogFileManager *logFileManager)
 				logFileManager->updateSizeFromLastGame();
 			}
 		}
-		if (e.type == SDL_WINDOWEVENT) {
-			switch (e.window.event) {
-				case SDL_WINDOWEVENT_ENTER:
-					_cardDisplay->setHasFocus(true);
-					break;
-				case SDL_WINDOWEVENT_LEAVE:
-					_cardDisplay->setHasFocus(false);
-					break;
-				case SDL_WINDOWEVENT_FOCUS_GAINED:
-					_cardDisplay->setHasFocus(true);
-					break;
-				case SDL_WINDOWEVENT_FOCUS_LOST:
-					_cardDisplay->setHasFocus(false);
-					break;
-				default:
-					break;
-			}
-		}
 	}
 	return true;
 }

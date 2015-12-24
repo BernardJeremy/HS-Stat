@@ -5,7 +5,6 @@ CardDisplay::CardDisplay(SDL_Renderer *renderer, SpriteManager *spriteManager)
 {
 	_renderer = renderer;
 	_spriteManager = spriteManager;
-	_hasFocus = false;
 }
 
 
@@ -24,11 +23,11 @@ void CardDisplay::checkMousePosition() const
 	int x = 0;
 	int y = 0;
 
-	if (!_hasFocus)
-		return;
-
 	spriteList = _spriteManager->getSpriteList();
 	SDL_GetMouseState(&x, &y);
+
+	if (x == 0 || y == 0)
+		return;
 
 	if (x >= SpriteManager::POS_X_ZONE + SpriteManager::W_LOCAL_ZONE + SpriteManager::DECAL_ZONE)
 	{
@@ -72,9 +71,4 @@ bool CardDisplay::displayCard(int mouseX, int mouseY, Sprite *sprite) const
 	}
 
 	return true;
-}
-
-void CardDisplay::setHasFocus(bool hasFocus)
-{
-	_hasFocus = hasFocus;
 }

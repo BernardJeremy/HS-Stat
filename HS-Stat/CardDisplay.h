@@ -12,7 +12,6 @@ public:
 	~CardDisplay();
 
 	void checkMousePosition() const;
-	void setHasFocus(bool hasFocus);
 
 private:
 	bool displayCard(int mouseX, int mouseY, Sprite *sprite) const;
@@ -20,6 +19,5 @@ private:
 private:
 	SDL_Renderer *_renderer;
 	SpriteManager *_spriteManager;
-	bool _hasFocus;
 };
 
